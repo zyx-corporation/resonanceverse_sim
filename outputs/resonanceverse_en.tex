@@ -71,7 +71,7 @@ This paper presents Resonanceverse, a theoretical framework that reframes meanin
 
 Formally, $\Delta M_{ij}(t) := M_j(t) - M_i(t)$ denotes the semantic state difference between two agents $(i, j)$ at time $t$, with $M_k(t) \in \mathbb{R}^d$. Misdelivery is not equated with $\Delta M$: it operates as an interaction-theoretic generative layer through which such differences emerge, endure, and are reshaped across channels. Nevertheless, $\Delta M$ indexes how misalignment evolves in the quantitative layer once states are encoded.
 
-Relations are modeled as temporal integrals coupling contextual weights and differences. Resonance requires the joint satisfaction of semantic, uncertainty, and value constraints $C_M(t), C_U(t), C_V(t)$; this paper articulates how pragmatic stability emerges without convergence to semantic identity.
+Relations are modeled as temporal integrals coupling contextual weights and differences. Resonance requires the joint satisfaction of semantic, uncertainty, and value constraints $\mathcal{C}_M(t), \mathcal{C}_U(t), \mathcal{C}_V(t)$; this paper articulates how pragmatic stability emerges without convergence to semantic identity.
 
 This approach reframes meaning not as a fixed entity but as a persistent, structurally constrained process of continuous deviation. By bridging post-structuralist philosophy and dynamical systems theory, Resonanceverse provides a formal foundation for applications in artificial intelligence, communication theory, and institutional design.
 
@@ -268,12 +268,22 @@ The important point in such a system is that it may remain stable even though se
 
 This condition means that semantic differences continue to exist while remaining bounded within a certain range instead of diverging without limit. Meaning stabilizes without converging. This non-convergent stability offers a conceptual framework distinct from classical stability concepts based on convergence.
 
-Finally, a residual semantic difference that does not disappear over time is introduced. To avoid confusion with the graph $G(t)$, the residual is written as $G_{ij}(T)$, where
+Finally, residual semantic differences that do not disappear over time are introduced. To avoid confusion with the graph $G(t)$, residual amplitudes are denoted by $\Gamma$ rather than $G$. The finite-tail residual is defined as
 \[
-G_{ij}(T) := \sup_{t \geq T} \|\Delta M_{ij}(t)\|.
+\Gamma_{ij}(T)
+:=
+\sup_{t \ge T}
+\|\Delta M_{ij}(t)\|,
+\]
+and its asymptotic counterpart is
+\[
+\Gamma_{ij}^{\infty}
+:=
+\limsup_{t \to \infty}
+\|\Delta M_{ij}(t)\|.
 \]
 
-This quantity represents the difference that is never completely resolved through interaction and continues to influence the long-term behavior of the system. The residual is a mathematical expression of the fact that meaning is never fully unified, and at the same time it provides a mechanism through which past interactions continue to affect the present.
+The quantity $\Gamma_{ij}(T)$ captures the maximal residual amplitude after time $T$, while $\Gamma_{ij}^{\infty}$ captures the long-run upper residual. These quantities express the fact that meaning is never fully unified, and they provide a way to distinguish finite-horizon residual control from asymptotic non-collapse.
 
 
 \subsection{Illustrative Two-Agent Example}
@@ -405,21 +415,22 @@ This is the same $\delta$ as in the consensus definition of Section 3. It specif
 
 A state satisfying these conditions is called \textit{non-convergent stability}. It refers to a state in which meaning continues to fluctuate within a bounded region without converging to a fixed point. The important point is that fluctuation itself does not imply instability; rather, stability can arise precisely because fluctuation is maintained within constrained bounds.
 
-To characterize this non-convergent stability more precisely, this paper introduces the concept of \textit{resonance}. The symbols $C_M(t), C_U(t), C_V(t)$ denote predicates that assign truth values at each time; they are not abbreviations for the semantic state vector $M_i(t)$. Their formal definitions follow.
+To characterize this non-convergent stability more precisely, this paper introduces the concept of \textit{resonance}. The symbols $\mathcal{C}_M(t), \mathcal{C}_U(t), \mathcal{C}_V(t)$ denote predicates that assign truth values at each time; they are not abbreviations for the semantic state vector $M_i(t)$. Their formal definitions follow.
 
-\begin{definition}[Constraint Functions $C_M, C_U, C_V$]
+\begin{definition}[Constraint Functions $\mathcal{C}_M, \mathcal{C}_U, \mathcal{C}_V$]
 Let $\theta_M, \theta_U, \theta_V > 0$ be domain-specific thresholds.
 
 \textbf{(i) Semantic variance constraint.}
 \[
-C_M(t) :\Leftrightarrow \emph{Var}_E(\Delta M(t)) < \theta_M,
+\mathcal{C}_M(t) :\Leftrightarrow
+\operatorname{Var}_{(i,j)\in E(t)}\!\left(\|\Delta M_{ij}(t)\|\right) < \theta_M,
 \]
-where $\emph{Var}_E$ is the edge-wise variance defined in Section 3.
+where the variance is taken over the scalar edge norms $\|\Delta M_{ij}(t)\|$.
 
 \textbf{(ii) Uncertainty alignment constraint.}
 Let $U_i(t) \in [0,1]$ denote agent $i$'s normalized epistemic uncertainty at time $t$. Concretely, $U_i(t) = H(\pi_i(t)) / \log K$, where $H$ is Shannon entropy, $\pi_i(t)$ is agent $i$'s belief distribution over $K$ states, and the denominator normalizes to $[0,1]$. Define:
 \[
-D_U(t) := \max_{(i,j) \in E(t)} |U_i(t) - U_j(t)|, \quad C_U(t) :\Leftrightarrow D_U(t) < \theta_U.
+D_U(t) := \max_{(i,j) \in E(t)} |U_i(t) - U_j(t)|, \quad \mathcal{C}_U(t) :\Leftrightarrow D_U(t) < \theta_U.
 \]
 
 \textbf{(iii) Value direction constraint.}
@@ -429,26 +440,32 @@ d_{\cos}(V_i, V_j) := 1 - \frac{V_i \cdot V_j}{\|V_i\|\,\|V_j\|} \in [0, 2].
 \]
 The value divergence and constraint are:
 \[
-D_V(t) := \max_{(i,j) \in E(t)} d_{\cos}(V_i(t), V_j(t)), \quad C_V(t) :\Leftrightarrow D_V(t) < \theta_V.
+D_V(t) := \max_{(i,j) \in E(t)} d_{\cos}(V_i(t), V_j(t)), \quad \mathcal{C}_V(t) :\Leftrightarrow D_V(t) < \theta_V.
 \]
 \end{definition}
 
 The concept of resonance itself is the logical conjunction:
 \[
-\text{Resonance}(t) \Leftrightarrow C_M(t) \land C_U(t) \land C_V(t).
+\mathrm{Resonance}(t)
+\iff
+\mathcal{C}_M(t)
+\land
+\mathcal{C}_U(t)
+\land
+\mathcal{C}_V(t).
 \]
 
 The three constraints are logically independent: each addresses a distinct dimension (semantic spread, epistemic alignment, evaluative coherence). Their simultaneous satisfaction cannot be reduced to a single scalar condition without loss of structural information.
 
 \begin{remark}[Agents with Zero Evaluative Vector]
-The cosine distance $d_{\cos}$ is undefined when $\|V_i\| = 0$. Such agents---those lacking evaluative direction---are excluded from the $C_V$ evaluation. Formally, $D_V(t)$ is computed over the restricted edge set $E_V(t) := \{(i,j) \in E(t) : \|V_i(t)\| > 0 \text{ and } \|V_j(t)\| > 0\}$. If $E_V(t) = \emptyset$, the condition $C_V(t)$ is vacuously true.
+The cosine distance $d_{\cos}$ is undefined when $\|V_i\| = 0$. Such agents---those lacking evaluative direction---are excluded from the $\mathcal{C_V}$ evaluation. Formally, $D_V(t)$ is computed over the restricted edge set $E_V(t) := \{(i,j) \in E(t) : \|V_i(t)\| > 0 \text{ and } \|V_j(t)\| > 0\}$. If $E_V(t) = \emptyset$, the condition $C_V(t)$ is vacuously true.
 \end{remark}
 
 \begin{definition}[Resonance]
-A multi-agent system is in \textit{resonance} at time $t$ if and only if the semantic variance condition ($C_M$), uncertainty alignment condition ($C_U$), and value direction condition ($C_V$) are simultaneously satisfied. Resonance is the state in which semantic differences persist but are coherently constrained across multiple dimensions.
+A multi-agent system is in \textit{resonance} at time $t$ if and only if the semantic variance condition ($\mathcal{C}_M$), uncertainty alignment condition ($\mathcal{C}_U$), and value direction condition ($\mathcal{C}_V$) are simultaneously satisfied. Resonance is the state in which semantic differences persist but are coherently constrained across multiple dimensions.
 \end{definition}
 
-It is crucial that alignment here does not mean complete identity. $C_M$ requires that semantic differences be controlled in terms of variance and thresholds, not eliminated. Likewise, $C_U$ refers to the degree of shared uncertainty, and $C_V$ to alignment of evaluative standards or directions of judgment.
+It is crucial that alignment here does not mean complete identity. $\mathcal{C}_M$ requires that semantic differences be controlled in terms of variance and thresholds, not eliminated. Likewise, $\mathcal{C}_U$ refers to the degree of shared uncertainty, and $\mathcal{C}_V$ to alignment of evaluative standards or directions of judgment.
 
 Thus, resonance is a state in which differences persist but are coherently constrained across multiple dimensions. In such a state, semantic differences do not diffuse chaotically but are distributed according to a specific structure. This structure can be represented as a region in semantic state space:
 \[
@@ -459,27 +476,73 @@ Here, $B$ is a bounded region of the encoded space $\mathbb{R}^d$, and semantic 
 
 From the perspective of dynamical systems, such a region resembles an attractor. However, the attractor in this study is not a point of convergence but a region in which non-convergent trajectories are constrained. In this sense, resonance can be interpreted as a \textit{non-convergent attractor}.
 
-Considering the long-term behavior of semantic differences, there remains a long-term amplitude that does not disappear. Taking the norm first, define:
+Considering the long-term behavior of semantic differences, there remains a long-term amplitude that does not disappear. Taking the norm first, define the finite-tail residual and the asymptotic residual by
 \[
-G^{(\infty)}_{ij} := \limsup_{t \to \infty} \|\Delta M_{ij}(t)\|.
+\Gamma_{ij}(T)
+:=
+\sup_{t \ge T}
+\|\Delta M_{ij}(t)\|,
 \]
-
-For the nonnegative scalar map $h_{ij}(t) = \|\Delta M_{ij}(t)\|$, the general formula for upper limits gives:
 \[
-G^{(\infty)}_{ij} = \lim_{T \to \infty} G_{ij}(T) = \inf_{T \geq 0} \sup_{t \geq T} \|\Delta M_{ij}(t)\|.
+\Gamma_{ij}^{\infty}
+:=
+\limsup_{t \to \infty}
+\|\Delta M_{ij}(t)\|.
 \]
-
-To avoid the earlier draft problem of mixing $\limsup$ with finite time $t$, amplitude is always written through $\|\cdot\|$ and $h_{ij}$.
+For the nonnegative scalar map $h_{ij}(t)=\|\Delta M_{ij}(t)\|$, the general formula for upper limits gives
+\[
+\Gamma_{ij}^{\infty}
+=
+\lim_{T\to\infty}\Gamma_{ij}(T)
+=
+\inf_{T\ge 0}
+\sup_{t\ge T}
+\|\Delta M_{ij}(t)\|.
+\]
+To avoid the earlier draft problem of mixing $\limsup$ with finite time $t$, amplitude is always written through $\|\cdot\|$, $h_{ij}$, and the $\Gamma$ notation.
 
 This residual shows that differences generated by past interactions are never fully eliminated and continue to influence the system. In a resonant state, this residual is also constrained within a certain range. Resonance therefore refers not only to the current state but also to the stability of the entire structure including its history.
 
-Thus, resonance is positioned as a condition for stability under non-convergence. Meaning can remain structurally stable while preserving difference without converging. This stability arises through the simultaneous action of the constraints $C_M, C_U, C_V$.
+Thus, resonance is positioned as a condition for stability under non-convergence. Meaning can remain structurally stable while preserving difference without converging. This stability arises through the simultaneous action of the constraints $\mathcal{C}_M, \mathcal{C}_U, \mathcal{C}_V$.
 
 Resonance generalizes the concept of consensus introduced in Section 3. Consensus focuses primarily on the magnitude and stability of semantic differences, whereas resonance additionally includes dimensions of uncertainty and value. Consensus can therefore be understood as a special case of resonance.
 
-\subsection{Theoretical Properties of Non-Convergent Stability}
+\section{Theoretical Properties and Modeling Conditions}
 
-This subsection briefly lists the mathematical foundations on which Sections 2 through 4 rely. Full proofs are not developed here; rigorous development is left to future work. The term ``Theorem'' is avoided, and claims that still require further assumptions are explicitly labeled as Proposition or Phenomenological Principle. In particular, the boundedness of the update term $f$ alone does not imply boundedness of trajectories. The central assumption of this subsection is therefore the existence of a positively invariant region.
+This section briefly lists the mathematical foundations on which Sections 2 through 4 rely. Full proofs are not developed here; rigorous development is left to future work. The term ``Theorem'' is avoided, and claims that still require further assumptions are explicitly labeled as Proposition or Phenomenological Principle. In particular, the boundedness of the update term $f$ alone does not imply boundedness of trajectories. The central assumptions of this section therefore concern bounded updates, bounded interaction degree, an absorbing semantic region, and non-collapse.
+
+\begin{assumption}[Bounded Interaction Field]
+There exists $C_f>0$ such that
+\[
+\|f(\alpha,x)\| \le C_f
+\quad
+\text{for all } \alpha\in[0,1],\ x\in\mathbb{R}^d.
+\]
+\end{assumption}
+
+\begin{assumption}[Bounded Interaction Degree]
+There exists $D<\infty$ such that
+\[
+\deg(i,t) \le D
+\quad
+\text{for all } i,t.
+\]
+\end{assumption}
+
+\begin{assumption}[Absorbing Semantic Region]
+There exists a bounded set
+\[
+\mathcal{B}\subset\mathbb{R}^d
+\]
+such that every admissible trajectory eventually enters and remains in $\mathcal{B}$.
+\end{assumption}
+
+\begin{assumption}[Non-Collapse Condition]
+For the relevant interaction pair $(i,j)$,
+\[
+\limsup_{t\to\infty}\|\Delta M_{ij}(t)\|>0.
+\]
+\end{assumption}
 
 \begin{remark}[Bounded $f$ Alone Does Not Imply Bounded Trajectories]
 Even if the update function $f$ is uniformly bounded,
@@ -507,7 +570,7 @@ for the outward normal $n_i$. This paper adopts the set-level assumption above.
 
 
 \begin{proposition}[Existence of Non-Convergent but Amplitude-Bounded Regime]
-If Assumption 1 holds and the non-convergence axiom
+Under the assumptions above and the non-convergence condition
 \[
 \limsup_{t \to \infty} \|\Delta M_{ij}(t)\| > 0
 \]
@@ -566,11 +629,11 @@ For a perturbed system with external deterministic noise $\eta(t)$, or a stochas
 \end{assumption}
 
 \begin{phenomenological}[Absorption of External Perturbation]
-Under Assumption 3, perturbations are less likely to appear as anomalies and are instead layered onto existing fluctuations. The trajectory is globally constrained in $B'$, and resonance as structure is evaluated only by threshold exceedances.
+Under the expanded-region assumption, perturbations are less likely to appear as anomalies and are instead layered onto existing fluctuations. The trajectory is globally constrained in $B'$, and resonance as structure is evaluated only by threshold exceedances.
 \end{phenomenological}
 
 \begin{proposition}[Descriptive Meaning of Resonant States]
-If semantic variance $\text{Var}_E(\Delta M)$ and the uncertainty and value divergence indicators $D_U, D_V$ are each below their thresholds, then $\text{Resonance}(t)$ is satisfied. This is a direct restatement of the definition in Section 4; its existence becomes nontrivial only under concrete assignments of model coefficients.
+If semantic norm variance $\operatorname{Var}_{(i,j)\in E(t)}(\|\Delta M_{ij}(t)\|)$ and the uncertainty and value divergence indicators $D_U, D_V$ are each below their thresholds, then $\mathrm{Resonance}(t)$ is satisfied. This is a direct restatement of the definition in Section 4; its existence becomes nontrivial only under concrete assignments of model coefficients.
 \end{proposition}
 
 \subsection{Differences from Existing Theories}
@@ -588,7 +651,97 @@ Chaos and complexity theory address bounded but difficult-to-predict behavior. I
 Post-structuralist theories of meaning provide powerful insights into non-fixity, \textit{différance}, and misdelivery. This study does not reject those insights; rather, it formalizes them as $\Delta M$ networks and resonance conditions. Therefore, the non-convergent stability of Resonanceverse is positioned not as ``bounded non-convergence'' but as \textit{conditioned non-convergence}. In other words, this theory addresses not merely bounded trajectories, but states in which semantic differences, uncertainty differences, and value differences are institutionally rectified.
 
 
-\section{Philosophical Reflection: Methodological Analogy with Formal Incompleteness}
+\section{Illustrative Numerical Simulations}
+
+To examine the internal behavior of the proposed framework, we implemented a multi-agent simulation system and conducted four phases of experiments corresponding to Sections 2--4 and Appendix D. These experiments are constructive illustrations and sanity checks, not decisive empirical proof of the non-convergence axiom. The complete implementation is available at \url{https://github.com/zyx-corporation/resonanceverse_sim}.
+
+\subsection{Phase 1: Two-Agent Illustrative Dynamics}
+
+\textbf{Objectives:} Illustrate scale separation, the relative two-agent example, and the axiomatic foundation.
+
+\textbf{Setup:} Two-agent system in $\mathbb{R}^2$ with parameters specified in Section 2.4. Simulation time: $T_{\max}=100$ time units with time step $\Delta t=0.01$ (10,000 integration steps).
+
+\textbf{Results:}
+\begin{itemize}
+\item \textbf{Non-convergence axiom:} $\limsup_{t \to \infty} \|\Delta M_{12}(t)\| = 0.1009 > 0$ [OK]
+\item \textbf{Boundedness:} $\max_t \|\Delta M_{12}(t)\| = 0.1416 < \varepsilon_1 = 0.15$ [OK]
+\item \textbf{Slow variation:} $\max_t |d\|\Delta M_{12}\|/dt| = 0.0543$, slightly exceeding the illustrative threshold $\delta = 0.05$; the condition is satisfied if $\delta$ is relaxed to $0.06$. [threshold-sensitive]
+\end{itemize}
+
+\textbf{Conclusion:} Phase 1 illustrates that semantic differences can remain bounded while avoiding numerical convergence to zero under the specified dynamics. See supplementary Figure 1.
+
+\subsection{Phase 2: Multi-Agent Consensus Formation}
+
+\textbf{Objectives:} Illustrate Section 3 consensus definition and institutional constraint effects.
+
+\textbf{Setup:} $n = 10$ agents, small-world network topology ($k = 4$, $p_{\text{rewire}} = 0.1$). Three scenarios: (A) no constraint, (B) institutional constraint ($\text{Var}_E < \theta_M = 0.2$), (C) external perturbation at $t = 50$.
+
+\textbf{Results:}
+\begin{itemize}
+\item \textbf{Scenario A (unconstrained):} Consensus achieved at $t = 385$.
+\item \textbf{Scenario B (constrained):} Consensus achieved at $t = 323$ (42\% faster).
+\item \textbf{Scenario C (perturbed):} System recovers to resonance state within 150 steps.
+\end{itemize}
+
+\textbf{Conclusion:} Institutional constraints effectively regulate $\Delta M$ network distribution, illustrating Section 3's institutional design framework. See supplementary Figure 2.
+
+\subsection{Phase 3: Resonance-Condition Diagnostic Run}
+
+\textbf{Objectives:} Illustrate the resonance predicates and their simultaneous satisfiability.
+
+\textbf{Setup:} $n = 10$ agents, extended state space $\mathbb{R}^3$ (semantic + uncertainty + value), $T_{\max} = 200$ steps. Resonance thresholds: $\theta_M = 0.2$, $\theta_U = 0.15$, $\theta_V = 0.25$.
+
+\textbf{Threshold Selection:} Thresholds were derived from baseline statistics of the unconstrained system (Phase 2, Scenario A). For each quantity $Q \in \{\text{Var}_E, D_U, D_V\}$, the threshold was set at $\theta_Q = \bar{Q}_{\text{baseline}} + 2\sigma_Q$, where $\bar{Q}$ and $\sigma_Q$ are the mean and standard deviation of $Q$ over the final 100 timesteps of the unconstrained run. This ensures that resonance is a non-trivial condition: it is not automatically satisfied in the absence of structural coordination.
+
+\textbf{Methodology:}
+
+\textit{State representation.} Each agent $i$ carries a state vector $[M_i^{(\text{sem})}, M_i^{(\text{unc})}, M_i^{(\text{val})}] \in \mathbb{R}^3$, representing the semantic, uncertainty, and value components respectively. The three components evolve under coupled dynamics: $M_i^{(\text{sem})}$ follows the interaction function $f$ defined in Section 2; $M_i^{(\text{unc})}$ is updated proportionally to the local variance of incoming $\Delta M$ signals; $M_i^{(\text{val})}$ follows a gradient rule driven by the cosine similarity of neighboring value vectors.
+
+\textit{Resonance evaluation.} At each timestep $t$, the three constraint functions $C_M(t), C_U(t), C_V(t)$ are evaluated as defined in Definition 3. Resonance is recorded as a binary variable: $\text{Resonance}(t) = 1$ if and only if all three constraints hold simultaneously.
+
+\textit{Lyapunov function.} The aggregate Lyapunov function $V(t) = \frac{1}{2}\sum_i \|M_i(t)\|^2$ is computed at each timestep. Its time derivative is estimated via finite differences: $\dot{V}(t) \approx (V(t+\Delta t) - V(t))/\Delta t$. The descent rate is reported as the fraction of timesteps where $\dot{V}(t) < 0$.
+
+\textit{Condition independence.} During Phase 3, pairwise Pearson correlations $\text{corr}(C_M, C_U)$, $\text{corr}(C_M, C_V)$, $\text{corr}(C_U, C_V)$ are computed over the binary time series of constraint satisfaction. A correlation exceeding 0.7 would indicate that the constraints are not measuring independent aspects of system state. The threshold 0.7 corresponds to $R^2 = 0.49$, i.e., one constraint would explain less than half the variance of another.
+
+\textbf{Results:}
+\begin{itemize}
+\item \textbf{Resonance attainment:} 98.6\% of timesteps satisfy $\mathcal{C}_M \land \mathcal{C}_U \land \mathcal{C}_V$.
+\item \textbf{Lyapunov descent:} $V(t) = \frac{1}{2}\sum_i \|M_i\|^2$ decreases by 58.9\%.
+\item \textbf{Condition independence (dynamical):} Correlation between $\mathcal{C_M}$ and $\mathcal{C_V}$: 0.609.
+\item \textbf{Condition independence (statistical, Phase 4):} Correlation 0.022.
+\end{itemize}
+
+\textbf{Conclusion:} The resonance conditions are simultaneously satisfiable in this constructed simulation and are associated with stable non-convergent behavior under the chosen thresholds. See supplementary Figure 3.
+
+\subsection{Phase 4: Falsifiability Protocol Illustration}
+
+\textbf{Objectives:} Illustrate Appendix D falsifiability conditions via direct simulation diagnostics.
+
+\textbf{Methodology:}
+
+\textit{Protocol 1 (Non-Convergence Axiom).} The falsification target is: ``there exist domains in which $\|\Delta M_{ij}(t)\| \to 0$ under sustained interaction.'' To test this, the simulation is run for $t_{\max} = 500$ steps across three semantic domains (legal, scientific, creative), with 100 independent trials per domain. Initial conditions are drawn uniformly from $[-1, 1]^d$. Convergence is declared if $\|\Delta M_{ij}(t_{\max})\| < 10^{-6}$ for all agent pairs. The convergence rate (fraction of trials converging) is the primary metric.
+
+\textit{Protocol 3 (Condition Independence).} The falsification target is: ``$C_M, C_U, C_V$ are mutually redundant and can be collapsed into a single scalar.'' To test this, 1000 agent state vectors are generated uniformly at random in $\mathbb{R}^3$. For each state, the three constraint predicates are evaluated, yielding three binary vectors of length 1000. Pairwise Pearson correlations are computed. The independence rejection threshold is $\max(\text{corr}) > 0.7$, corresponding to $R^2 > 0.49$; exceeding this would indicate that two constraints share more than half their variance, undermining the claim of logical independence.
+
+\textbf{Protocol 1 (Non-Convergence Axiom):}
+\begin{itemize}
+\item Conduct 100+ trials across diverse domains (legal, scientific, creative).
+\item Measure convergence rate: $\|\Delta M(t_{\max})\| < 10^{-6}$ after $t_{\max} = 500$ steps.
+\item \textbf{Result:} 0\% convergence across all 300 trials. No convergence was observed in these constructed trials; this is suggestive within the simulation model but not a general empirical proof.
+\end{itemize}
+
+\textbf{Protocol 3 (Condition Independence):}
+\begin{itemize}
+\item Generate 1000 random agent states.
+\item Measure pairwise correlations: $\text{corr}(C_M, C_U)$, $\text{corr}(C_M, C_V)$, $\text{corr}(C_U, C_V)$.
+\item Threshold for independence rejection: $\max(\text{corr}) > 0.7$.
+\item \textbf{Result:} $\max(\text{corr}) = 0.022 \ll 0.7$. Low correlation was observed under this sampling protocol; this supports non-redundancy within the chosen encoding.
+\end{itemize}
+
+\textbf{Conclusion:} The falsifiability protocols clarify how the framework could be challenged. The reported diagnostics are model-internal illustrations rather than universal empirical confirmation. See supplementary Figure 4.
+
+\section{Philosophical and Institutional Discussion}
+\subsection{Methodological Analogy with Formal Incompleteness}
 
 This section does not offer a mathematical derivation, but a \textit{methodological aid}. The formal content of this paper is contained in Sections 2--4 and does not depend on the analogy developed here. Therefore, this section is not part of the proof structure of Resonanceverse, but an interpretive note for placing the concept of non-convergent stability within a broader intellectual context.
 
@@ -656,94 +809,7 @@ The same applies to artificial intelligence systems. Designs that aim only at co
 
 Thus, the G\"odelian analogy is not a foundation of Resonanceverse. It is an aid for reading incompleteness not as a defect, but as a structural condition requiring higher-order constraint design. In meaning, institutions, and artificial intelligence alike, what matters is not complete closure, but how what cannot be fully closed is woven into a sustainable structure.
 
-\section{Illustrative Numerical Simulations}
 
-To examine the internal behavior of the proposed framework, we implemented a multi-agent simulation system and conducted four phases of experiments corresponding to Sections 2--4 and Appendix D. These experiments are constructive illustrations and sanity checks, not decisive empirical proof of the non-convergence axiom. The complete implementation is available at \url{https://github.com/zyx-corporation/resonanceverse_sim}.
-
-\subsection{Phase 1: Two-Agent Baseline Verification}
-
-\textbf{Objectives:} Illustrate scale separation, the relative two-agent example, and the axiomatic foundation.
-
-\textbf{Setup:} Two-agent system in $\mathbb{R}^2$ with parameters specified in Section 2.4. Simulation time: $T_{\max}=100$ time units with time step $\Delta t=0.01$ (10,000 integration steps).
-
-\textbf{Results:}
-\begin{itemize}
-\item \textbf{Non-convergence axiom:} $\limsup_{t \to \infty} \|\Delta M_{12}(t)\| = 0.1009 > 0$ [OK]
-\item \textbf{Boundedness:} $\max_t \|\Delta M_{12}(t)\| = 0.1416 < \varepsilon_1 = 0.15$ [OK]
-\item \textbf{Slow variation:} $\max_t |d\|\Delta M_{12}\|/dt| = 0.0543$, slightly exceeding the illustrative threshold $\delta = 0.05$; the condition is satisfied if $\delta$ is relaxed to $0.06$. [threshold-sensitive]
-\end{itemize}
-
-\textbf{Conclusion:} Phase 1 illustrates that semantic differences can remain bounded while avoiding numerical convergence to zero under the specified dynamics. See supplementary Figure 1.
-
-\subsection{Phase 2: Multi-Agent Consensus Formation}
-
-\textbf{Objectives:} Illustrate Section 3 consensus definition and institutional constraint effects.
-
-\textbf{Setup:} $n = 10$ agents, small-world network topology ($k = 4$, $p_{\text{rewire}} = 0.1$). Three scenarios: (A) no constraint, (B) institutional constraint ($\text{Var}_E < \theta_M = 0.2$), (C) external perturbation at $t = 50$.
-
-\textbf{Results:}
-\begin{itemize}
-\item \textbf{Scenario A (unconstrained):} Consensus achieved at $t = 385$.
-\item \textbf{Scenario B (constrained):} Consensus achieved at $t = 323$ (42\% faster).
-\item \textbf{Scenario C (perturbed):} System recovers to resonance state within 150 steps.
-\end{itemize}
-
-\textbf{Conclusion:} Institutional constraints effectively regulate $\Delta M$ network distribution, illustrating Section 3's institutional design framework. See supplementary Figure 2.
-
-\subsection{Phase 3: Resonance Condition Verification}
-
-\textbf{Objectives:} Illustrate the resonance predicates and their simultaneous satisfiability.
-
-\textbf{Setup:} $n = 10$ agents, extended state space $\mathbb{R}^3$ (semantic + uncertainty + value), $T_{\max} = 200$ steps. Resonance thresholds: $\theta_M = 0.2$, $\theta_U = 0.15$, $\theta_V = 0.25$.
-
-\textbf{Threshold Selection:} Thresholds were derived from baseline statistics of the unconstrained system (Phase 2, Scenario A). For each quantity $Q \in \{\text{Var}_E, D_U, D_V\}$, the threshold was set at $\theta_Q = \bar{Q}_{\text{baseline}} + 2\sigma_Q$, where $\bar{Q}$ and $\sigma_Q$ are the mean and standard deviation of $Q$ over the final 100 timesteps of the unconstrained run. This ensures that resonance is a non-trivial condition: it is not automatically satisfied in the absence of structural coordination.
-
-\textbf{Methodology:}
-
-\textit{State representation.} Each agent $i$ carries a state vector $[M_i^{(\text{sem})}, M_i^{(\text{unc})}, M_i^{(\text{val})}] \in \mathbb{R}^3$, representing the semantic, uncertainty, and value components respectively. The three components evolve under coupled dynamics: $M_i^{(\text{sem})}$ follows the interaction function $f$ defined in Section 2; $M_i^{(\text{unc})}$ is updated proportionally to the local variance of incoming $\Delta M$ signals; $M_i^{(\text{val})}$ follows a gradient rule driven by the cosine similarity of neighboring value vectors.
-
-\textit{Resonance evaluation.} At each timestep $t$, the three constraint functions $C_M(t), C_U(t), C_V(t)$ are evaluated as defined in Definition 3. Resonance is recorded as a binary variable: $\text{Resonance}(t) = 1$ if and only if all three constraints hold simultaneously.
-
-\textit{Lyapunov function.} The aggregate Lyapunov function $V(t) = \frac{1}{2}\sum_i \|M_i(t)\|^2$ is computed at each timestep. Its time derivative is estimated via finite differences: $\dot{V}(t) \approx (V(t+\Delta t) - V(t))/\Delta t$. The descent rate is reported as the fraction of timesteps where $\dot{V}(t) < 0$.
-
-\textit{Condition independence.} During Phase 3, pairwise Pearson correlations $\text{corr}(C_M, C_U)$, $\text{corr}(C_M, C_V)$, $\text{corr}(C_U, C_V)$ are computed over the binary time series of constraint satisfaction. A correlation exceeding 0.7 would indicate that the constraints are not measuring independent aspects of system state. The threshold 0.7 corresponds to $R^2 = 0.49$, i.e., one constraint would explain less than half the variance of another.
-
-\textbf{Results:}
-\begin{itemize}
-\item \textbf{Resonance attainment:} 98.6\% of timesteps satisfy $C_M \land C_U \land C_V$.
-\item \textbf{Lyapunov descent:} $V(t) = \frac{1}{2}\sum_i \|M_i\|^2$ decreases by 58.9\%.
-\item \textbf{Condition independence (dynamical):} Correlation between $C_M$ and $C_V$: 0.609.
-\item \textbf{Condition independence (statistical, Phase 4):} Correlation 0.022.
-\end{itemize}
-
-\textbf{Conclusion:} The resonance conditions are simultaneously satisfiable in this constructed simulation and are associated with stable non-convergent behavior under the chosen thresholds. See supplementary Figure 3.
-
-\subsection{Phase 4: Falsifiability Protocol Illustration}
-
-\textbf{Objectives:} Illustrate Appendix D falsifiability conditions via direct simulation diagnostics.
-
-\textbf{Methodology:}
-
-\textit{Protocol 1 (Non-Convergence Axiom).} The falsification target is: ``there exist domains in which $\|\Delta M_{ij}(t)\| \to 0$ under sustained interaction.'' To test this, the simulation is run for $t_{\max} = 500$ steps across three semantic domains (legal, scientific, creative), with 100 independent trials per domain. Initial conditions are drawn uniformly from $[-1, 1]^d$. Convergence is declared if $\|\Delta M_{ij}(t_{\max})\| < 10^{-6}$ for all agent pairs. The convergence rate (fraction of trials converging) is the primary metric.
-
-\textit{Protocol 3 (Condition Independence).} The falsification target is: ``$C_M, C_U, C_V$ are mutually redundant and can be collapsed into a single scalar.'' To test this, 1000 agent state vectors are generated uniformly at random in $\mathbb{R}^3$. For each state, the three constraint predicates are evaluated, yielding three binary vectors of length 1000. Pairwise Pearson correlations are computed. The independence rejection threshold is $\max(\text{corr}) > 0.7$, corresponding to $R^2 > 0.49$; exceeding this would indicate that two constraints share more than half their variance, undermining the claim of logical independence.
-
-\textbf{Protocol 1 (Non-Convergence Axiom):}
-\begin{itemize}
-\item Conduct 100+ trials across diverse domains (legal, scientific, creative).
-\item Measure convergence rate: $\|\Delta M(t_{\max})\| < 10^{-6}$ after $t_{\max} = 500$ steps.
-\item \textbf{Result:} 0\% convergence across all 300 trials. No convergence was observed in these constructed trials; this is suggestive within the simulation model but not a general empirical proof.
-\end{itemize}
-
-\textbf{Protocol 3 (Condition Independence):}
-\begin{itemize}
-\item Generate 1000 random agent states.
-\item Measure pairwise correlations: $\text{corr}(C_M, C_U)$, $\text{corr}(C_M, C_V)$, $\text{corr}(C_U, C_V)$.
-\item Threshold for independence rejection: $\max(\text{corr}) > 0.7$.
-\item \textbf{Result:} $\max(\text{corr}) = 0.022 \ll 0.7$. Low correlation was observed under this sampling protocol; this supports non-redundancy within the chosen encoding.
-\end{itemize}
-
-\textbf{Conclusion:} The falsifiability protocols clarify how the framework could be challenged. The reported diagnostics are model-internal illustrations rather than universal empirical confirmation. See supplementary Figure 4.
 
 \section{Conclusion}
 
@@ -757,7 +823,7 @@ Section 4 introduced non-convergent stability as the stability concept for non-c
 
 Section 5 situated the framework in a broader theoretical context through a carefully limited methodological analogy with formal incompleteness. The analogy was not used as a mathematical foundation, but as a conceptual aid for separating completeness from stability. It emphasized structural persistence rather than truth as an endpoint, and connected non-convergent stability to institutional and architectural constraint design, including the possible role of evaluators such as RDE.
 
-Section 6 presented illustrative numerical simulations across four phases. The experiments demonstrate that, under explicitly specified dynamics, one can construct bounded non-convergent behavior, observe institutional constraint effects, obtain resonance-like satisfaction of $C_M \land C_U \land C_V$, and formulate falsifiability-oriented diagnostics. These results support the coherence of the proposed modeling framework, but they do not constitute a universal empirical proof of the non-convergence axiom.
+Section 6 presented illustrative numerical simulations across four phases. The experiments demonstrate that, under explicitly specified dynamics, one can construct bounded non-convergent behavior, observe institutional constraint effects, obtain resonance-like satisfaction of $\mathcal{C}_M \land \mathcal{C}_U \land \mathcal{C}_V$, and formulate falsifiability-oriented diagnostics. These results support the coherence of the proposed modeling framework, but they do not constitute a universal empirical proof of the non-convergence axiom.
 
 \subsection{Redefinition of Meaning}
 
