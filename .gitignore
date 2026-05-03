@@ -217,3 +217,42 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 .DS_Store
+
+# LaTeX auxiliary files
+*.aux
+*.lof
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# LaTeX intermediate files
+*.dvi
+*.xdv
+*-converted-to.*
+*.ps
+
+# LaTeX bibliography/index
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+*.ind
+*.idx
+*.ilg
+
+# LaTeX misc
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.pdfsync
+
+# latexmk
+*.fdb_latexmk

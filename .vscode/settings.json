@@ -1,0 +1,23 @@
+{
+    "latex-workshop.latex.recipes": [
+      {
+        "name": "xelatex",
+        "tools": ["xelatex"]
+      }
+    ],
+    "latex-workshop.latex.tools": [
+      {
+        "name": "xelatex",
+        "command": "xelatex",
+        "args": [
+          "-interaction=nonstopmode",
+          "-synctex=1",
+          "%DOCFILE%"
+        ]
+      }
+    ],
+    "files.encoding": "utf8",
+    "[latex]": {
+      "editor.formatOnSave": false
+    }
+}

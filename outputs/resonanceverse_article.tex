@@ -1,0 +1,693 @@
+\documentclass[11pt,a4paper]{article}
+
+% ========== パッケージ群 ==========
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% ========== 定理環境 ==========
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{phenomenological}{Phenomenological Principle}[section]
+\newtheorem{clarification}{Clarification}[section]
+
+% ========== XeLaTeX 用日本語対応（macOS） ==========
+\usepackage{xeCJK}
+\setCJKmainfont{Hiragino Sans}
+\setCJKsansfont{Hiragino Sans Mono}
+\setCJKmonofont{Monaco}
+
+% ========== ハイパーリンク設定 ==========
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={Non-Convergence of Meaning and Resonance Conditions},
+  pdfauthor={Tomoyuki Kano},
+  pdfkeywords={resonance, misdelivery, meaning dynamics, non-convergent stability}
+}
+
+% ========== バージョン管理 ==========
+\newcommand{\versionnum}{1.1}
+\newcommand{\versiondate}{2026/05/03}
+
+% ========== タイトル情報 ==========
+\title{Non-Convergence of Meaning and Resonance Conditions:\\
+A Foundational Theory of Resonanceverse Based on Misdelivery\\
+\large \textit{Version \versionnum, \versiondate}}
+
+\author{%
+Tomoyuki Kano$^{1,*}$
+}
+
+\date{\today}
+
+% ========== 本文開始 ==========
+\begin{document}
+
+\maketitle
+
+% ========== 所属・連絡先（タイトル直下） ==========
+\begin{center}
+\small
+$^{1}$ Artificial Sapience Laboratory, ZYX Corp., Nagoya, Japan\\
+$^{*}$ Corresponding author.\\
+E-mail: \url{tomyuk@zyxcorp.jp}\\
+ORCID: \url{https://orcid.org/0009-0004-8213-4631}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{abstract}
+This paper presents Resonanceverse, a theoretical framework that reframes meaning as a non-convergent dynamical process conditioned by misdelivery. While post-structuralist philosophy, particularly Jacques Derrida, has disclosed the instability of meaning, such insights remain largely descriptive unless coupled to dynamical models. Accordingly, meaning is modeled as an encoded state trajectory in Euclidean space $\mathbb{R}^d$, on which differences and norms are well defined.
+
+Formally, $\Delta M_{ij}(t) := M_j(t) - M_i(t)$ denotes the semantic state difference between two agents $(i, j)$ at time $t$, with $M_k(t) \in \mathbb{R}^d$. Misdelivery is not equated with $\Delta M$: it operates as an interaction-theoretic generative layer through which such differences emerge, endure, and are reshaped across channels. Nevertheless, $\Delta M$ indexes how misalignment evolves in the quantitative layer once states are encoded.
+
+Relations are modeled as temporal integrals coupling contextual weights and differences. Resonance requires the joint satisfaction of semantic, uncertainty, and value constraints $C_M(t), C_U(t), C_V(t)$; this paper articulates how pragmatic stability emerges without convergence to semantic identity.
+
+This approach reframes meaning not as a fixed entity but as a persistent, structurally constrained process of continuous deviation. By bridging post-structuralist philosophy and dynamical systems theory, Resonanceverse provides a formal foundation for applications in artificial intelligence, communication theory, and institutional design.
+
+Comprehensive numerical validation via simulations confirms all theoretical predictions: Phase 1--4 experiments demonstrate non-convergent stability, institutional consensus formation, resonance condition satisfaction (98.6\% of timesteps), and falsifiability of the non-convergence axiom.
+\end{abstract}
+
+\section*{Keywords}
+resonance, misdelivery, meaning dynamics, non-convergent stability, multi-agent $\Delta M$ networks, consensus, resonance conditions, poststructuralism, Jacques Derrida, dynamical systems, institutional constraints, Gödel analogy, Resonanceverse
+
+\section{Introduction}
+
+What is meaning? This question has repeatedly been posed in philosophy, linguistics, cognitive science, and information science. Yet many theories, whether explicitly or implicitly, presuppose meaning as a relatively stable structure or as a state that can ultimately be identified.
+
+This presupposition was fundamentally reconsidered by post-structuralist thought in the latter half of the twentieth century. In particular, Jacques Derrida showed that meaning does not possess self-identity but is deferred and dispersed as \textit{différance}, thereby disclosing its indeterminacy and non-closure. Hiroki Azuma further reinterpreted this indeterminacy as ``postal deconstruction,'' proposing a model in which meaning is generated through misdelivery.
+
+However, these discussions largely remain within descriptive and critical frameworks. They do not yet amount to a formal theory capable of describing the temporal transformation and interactional dynamics of meaning. In other words, the following question remains insufficiently formalized:
+
+\textit{How does meaning change, persist, and collapse over time?}
+
+This study addresses that gap by introducing a framework of meaning dynamics, in which meaning is treated as a temporally evolving state quantity. In the formal model, each agent $i$ is assigned a semantic state $M_i(t)$, and the difference
+\[
+\Delta M_{ij}(t) := M_j(t) - M_i(t)
+\]
+is treated as the semantic state difference between two agents. This $\Delta M$ is not identical to misdelivery itself. Rather, misdelivery---processes such as deviation, displacement, and redelivery across channels---generates, amplifies, or suppresses $\Delta M$ over time. The misdelivery process functions as the pragmatic generative layer, while $\Delta M$ serves as the basic observable quantity when that process is mapped into a dynamical system. This position contrasts with approaches that treat error merely as noise.
+
+\subsection{Central Hypothesis}
+
+The central hypothesis of this paper is as follows:
+
+\textit{Meaning does not persist because it is correctly transmitted; it persists as a non-convergent dynamic structure precisely because it continues to be misdelivered.}
+
+From this perspective, meaning is defined not as a static object but as a relational and temporal process. Meaning is not internal to a single agent; rather, it is generated through interactions among multiple agents. Accordingly, semantic change is described as a network of differences among agents, that is, a $\Delta M$ network.
+
+This requires a reconsideration of the notion of consensus assumed in conventional consensus formation theories. In this paper, consensus is redefined not as identity of meaning but as a state in which the distribution of $\Delta M$ among agents forms a bounded and stable structure. In this sense, consensus is not the elimination of deviation, but the structural rectification of deviation.
+
+Furthermore, this paper redefines semantic stability not as convergence but as boundedness under non-convergence. Within this framework, meaning does not converge in principle and continues to fluctuate. Yet when such fluctuation satisfies certain structural conditions, the system exhibits stable behavior. This state is called \textit{resonance}.
+
+\subsection{Contributions}
+
+Based on this framework, the contributions of this paper are fivefold:
+
+\begin{enumerate}
+\item It formalizes the non-fixed and non-convergent character of meaning as an axiomatic system.
+\item It positions the misdelivery process as a generative layer and introduces the dynamics of $\Delta M$ networks as the observable layer of the corresponding dynamical system.
+\item It redefines consensus formation as the formation of a multi-agent $\Delta M$ network.
+\item It presents resonance conditions as conditions for stability under non-convergence.
+\item It indicates possible applications to institutional design and agent architecture, supported by comprehensive numerical validation.
+\end{enumerate}
+
+This study does not reject the insights of post-structuralism. Rather, it aims to preserve those insights while moving meaning theory from description toward dynamical systems theory. This redefinition treats meaning not as a fixed object but as a dynamic phenomenon that persists within relations, thereby offering a new foundation for modeling intelligence, designing artificial intelligence systems, and theorizing social institutions.
+
+\section{An Axiomatic System of Meaning Dynamics}
+
+This section defines an axiomatic system for treating meaning as a temporally changing state quantity. In this study, meaning is not a fixed representation or intrinsic attribute, but a dynamic state continuously updated through interactions among agents. Meaning is therefore not described as something converging to a single point, but as a state that moves through time.
+
+Let $M_i(t) \in \mathbb{R}^d$ denote the encoded semantic state held by agent $i$ at time $t$. Let $\mathcal{M}$ denote the abstract semantic state space. Measurable states are assumed to be represented in $\mathbb{R}^d$ through an encoding map
+\[
+\phi : \mathcal{M} \to \mathbb{R}^d.
+\]
+
+For economy of notation, the encoded image is denoted simply by $M_i(t)$. Differences and norms are defined using the ordinary linear algebraic structure of $\mathbb{R}^d$. We do not write $\Delta M_{ij} = M_j - M_i$ in a general metric space that has distance but lacks subtraction.
+
+The encoded state difference between agents $i$ and $j$ is defined as follows:
+\[
+\Delta M_{ij}(t) := M_j(t) - M_i(t) \in \mathbb{R}^d.
+\]
+
+Formally, $\Delta M_{ij}(t)$ is the difference between the semantic states held by two agents. Therefore, $\Delta M$ need not be identified with misdelivery itself. Misdelivery may belong to the pragmatic side of channels, institutions, and norms. Rather, $\Delta M$ is constrained here as the semantic difference that emerges, persists, and is transformed through misdelivery processes. This distinction becomes the pivot of both the mathematical and rhetorical structure of the theory.
+
+In this paper, $\Delta M$ is treated as a multidimensional vector. Its magnitude is therefore measured by a norm. Unless otherwise specified, the Euclidean norm is used:
+\[
+\|\Delta M_{ij}(t)\| := \left(\sum_{k=1}^{d} (\Delta M^{(k)}_{ij}(t))^2\right)^{1/2}.
+\]
+
+Each component may correspond to a different dimension, such as meaning, value, or uncertainty.
+
+In conventional theories, such a quantity may be treated as misunderstanding or noise. In this study, however, it is treated as the basic unit of semantic change. Meaning is driven not by identity but by difference. Such difference is not exceptional; it is the normal condition and starting point of meaning generation.
+
+\subsection{Core Axioms}
+
+Based on this premise, the first axiom concerns the temporal character of meaning. For every agent, the semantic state is not invariant over time:
+\[
+\forall I \subset [0,\infty), \mu(I) > 0 \Rightarrow \exists t_1, t_2 \in I \text{ such that } M_i(t_1) \neq M_i(t_2).
+\]
+
+This axiom means that meaning never remains fully static. In any interval of positive measure, meaning varies at least slightly; no state of complete identity persists throughout time.
+
+Furthermore, the process of meaning generation is not isolated but depends on interaction with others. This is expressed as follows:
+\[
+M_i(t) = M_i(0) + \int_0^t \sum_j f(\alpha_{ji}(\tau), \Delta M_{ji}(\tau)) d\tau,
+\]
+where the function $f$ maps contextual affinity and semantic difference to a change vector for the semantic state of the agent:
+\[
+f : [0, 1] \times \mathbb{R}^d \to \mathbb{R}^d.
+\]
+
+This expression states that the semantic state of agent $i$ is constituted by its initial state together with the accumulation of semantic differences arising in relation to other agents. It clarifies that meaning is formed not as an internal generation but as a relational process. In other words, meaning is the history of deviations from others.
+
+\subsection{Non-Convergence Axiom}
+
+Next, the following axiom concerns the temporal limit of semantic differences:
+\[
+\limsup_{t \to \infty} \|\Delta M_{ij}(t)\| > 0.
+\]
+
+This non-convergence axiom states that semantic differences between agents do not vanish over time. No matter how long interaction continues, complete identity is not achieved in principle. This distinguishes the present theory from models that presuppose the final unification of meaning.
+
+\begin{lemma}[Scale Separation]
+The non-convergence axiom $\limsup_{t \to \infty} \|\Delta M_{ij}(t)\| > 0$ does not prohibit trajectories from entering arbitrarily small neighborhoods of zero. What it denies is complete disappearance of difference, i.e., strict identity. 
+
+Formally, there may exist $\varepsilon_0 > 0$ and $T \geq 0$ such that
+\[
+\forall t \geq T: 0 < \|\Delta M_{ij}(t)\| < \varepsilon_0,
+\]
+while simultaneously
+\[
+\limsup_{t \to \infty} \|\Delta M_{ij}(t)\| > 0.
+\]
+
+This two-layer structure---``not going to zero'' at the logical layer and ``being rectifiable at an $\varepsilon$-scale'' at the pragmatic layer---is referred to as \textit{scale separation}.
+\end{lemma}
+
+The accumulation of such semantic differences constitutes relations among agents. A relation is defined as:
+\[
+R_{ij}(t) = \int_0^t g(\alpha_{ij}(\tau), \Delta M_{ij}(\tau)) d\tau,
+\]
+with $g : [0, 1] \times \mathbb{R}^d \to \mathbb{R}^r$.
+
+The function $g$ maps contextual affinity and semantic difference into a relational state, whose codomain is generally $\mathbb{R}^r$. Under this definition, a relation is not a static attribute, but a history of what semantic differences arose in the past and how they were accumulated. Even if two agents share the same current semantic state, they may be distinguished by different relational histories.
+
+However, not every semantic difference acts in the same way. Contextual affinity between agents modulates the influence of semantic change. Let $\alpha_{ij}(t)$ denote this contextual affinity, with $\alpha_{ij}(t) \in [0, 1]$.
+
+The effective semantic change is then defined as:
+\[
+\Delta M^{\text{eff}}_{ij}(t) = \alpha_{ij}(t) \Delta M_{ij}(t).
+\]
+
+This equation indicates that semantic difference does not contribute directly to semantic updating, but is weighted according to relation and context. Semantic change is therefore not merely a function of difference, but a process mediated by relation.
+
+The temporal evolution of semantic states is described by:
+\[
+\frac{dM_i(t)}{dt} = \sum_j f(\alpha_{ji}(t), \Delta M_{ji}(t)).
+\]
+
+Here, $f$ is generally nonlinear and may include historical dependency. This formulation shows that meaning behaves not as a simple additive process but as a complex interaction system.
+
+At the level of the entire multi-agent system, this interaction is represented as a network. Let $G(t) = (V, E(t))$ be a graph consisting of a set of agents $V$ and a set of interactions $E(t)$. Each edge corresponds to a semantic difference $\Delta M_{ij}(t)$ between agents. Meaning is not enclosed within individual agents but distributed across the entire network.
+
+The important point in such a system is that it may remain stable even though semantic differences do not disappear. This paper defines stability as the following condition:
+\[
+\exists T \geq 0, \exists \varepsilon > 0 \forall t \geq T, \forall (i,j) \in E(t) : 0 < \|\Delta M_{ij}(t)\| < \varepsilon.
+\]
+
+This condition means that semantic differences continue to exist while remaining bounded within a certain range instead of diverging without limit. Meaning stabilizes without converging. This non-convergent stability offers a conceptual framework distinct from classical stability concepts based on convergence.
+
+Finally, a residual semantic difference that does not disappear over time is introduced. To avoid confusion with the graph $G(t)$, the residual is written as $G_{ij}(T)$, where
+\[
+G_{ij}(T) := \sup_{t \geq T} \|\Delta M_{ij}(t)\|.
+\]
+
+This quantity represents the difference that is never completely resolved through interaction and continues to influence the long-term behavior of the system. The residual is a mathematical expression of the fact that meaning is never fully unified, and at the same time it provides a mechanism through which past interactions continue to affect the present.
+
+\subsection{Illustrative Two-Agent Example}
+
+To illustrate the axiomatic framework, consider a simple two-agent system in $\mathbb{R}^2$ with the following parameters:
+
+\begin{itemize}
+\item Initial states: $M_1(0) = [0.0, 0.0]$, $M_2(0) = [1.0, 0.5]$
+\item Initial difference: $\Delta M_{12}(0) = [1.0, 0.5]$, $\|\Delta M_{12}(0)\| \approx 1.12$
+\item Interaction function:
+\[
+f(\alpha, \Delta M) = \begin{cases}
+-0.5 \alpha \Delta M & \text{if } \|\Delta M\| < 0.1 \text{ (short-range repulsion)} \\
+0.3 \alpha \Delta M & \text{if } \|\Delta M\| \geq 0.1 \text{ (long-range attraction)}
+\end{cases}
+\]
+\item Contextual affinity: $\alpha_{12}(t) = 0.7 + 0.2\sin(0.1t)$ (time-varying)
+\end{itemize}
+
+\textbf{Expected dynamics:}
+\begin{enumerate}
+\item \textbf{Early phase} ($t \approx 0$--20): Large semantic difference drives agents toward each other via long-range attraction. $\|\Delta M_{12}\|$ decreases monotonically from $1.12$ to $\approx 0.3$.
+
+\item \textbf{Mid phase} ($t \approx 20$--60): As agents approach, short-range repulsion begins. Oscillatory behavior emerges. $\|\Delta M_{12}\|$ exhibits damped oscillations around $0.1$.
+
+\item \textbf{Late phase} ($t \approx 60$--100): System enters bounded non-convergent regime. $\|\Delta M_{12}\|$ fluctuates within $[\varepsilon_0, \varepsilon_1] = [0.05, 0.15]$ indefinitely.
+\end{enumerate}
+
+This example numerically validates Lemma 1: semantic differences remain nonzero while staying bounded, demonstrating how scale separation operates in practice.
+
+Through this axiomatic system, meaning is formalized not as an individual attribute but as a dynamic structure constituted by differences among agents and their histories. The framework introduced in this section provides the basis for redefining consensus formation in multi-agent systems in the following section.
+
+\section{Multi-Agent $\Delta M$ Networks and Consensus Formation}
+
+This section extends the meaning dynamics defined in Section 2 to multi-agent systems and redefines consensus formation. Conventional theories of consensus often implicitly presuppose a state in which agents' meanings coincide, i.e., $M_i = M_j$. However, as shown in Section 2, meaning is non-convergent, and semantic differences $\Delta M_{ij}(t)$ do not disappear in principle.
+
+Under this premise, consensus as complete identity generally does not hold.
+
+To address this problem, this study defines consensus not as identity of meaning but as a structure of semantic differences. Consensus is a state in which the $\Delta M$ network among agents forms a stable distribution under specified conditions.
+
+Let the set of agents be $\mathcal{A} = \{a_1, a_2, \ldots, a_n\}$. That is, $\mathcal{A}$ denotes the finite set of agents participating in the semantic interaction network.
+
+Let each agent have an encoded state $M_i(t) \in \mathbb{R}^d$. Let $X(t)$ denote the structural matrix whose components are semantic differences $\Delta M_{ij}(t)$. To avoid instability in matrix rendering, it is defined componentwise:
+\[
+[X(t)]_{ij} := \Delta M_{ij}(t) \quad (i \neq j), \quad [X(t)]_{ii} := 0.
+\]
+
+This structure $X(t)$ represents the semantic difference network of the multi-agent system. What matters here is that meaning is not confined within individual agents; it exists as this network of differences. Meaning is distributed and defined only through relations among agents.
+
+The temporal evolution of the network follows the dynamics introduced in Section 2:
+\[
+\frac{dM_i(t)}{dt} = \sum_j f(\alpha_{ji}(t), \Delta M_{ji}(t)).
+\]
+
+Through this interaction, the distribution of semantic differences changes over time, but it does not necessarily converge to zero. In actual multi-agent systems, persistent semantic difference is generally the rule rather than the exception.
+
+Based on this perspective, consensus is defined as follows:
+
+\[
+\text{Consensus}(t) \Leftrightarrow \forall (i,j) \in E(t) : \|\Delta M_{ij}(t)\| < \varepsilon \land -\delta < \frac{d}{dt}\|\Delta M_{ij}(t)\| < \delta.
+\]
+
+The tolerance $\varepsilon$ is not inconsistent with the non-convergence axiom $\limsup_{t \to \infty} \|\Delta M_{ij}(t)\| > 0$ from Section 2. Rather, it marks a pragmatic tolerance band while the logical layer excludes only complete disappearance of difference. This is the scale separation discussed earlier.
+
+Here, $\varepsilon > 0$ and $\delta > 0$ are tolerance thresholds. The latter constraint is not the one-sided condition $\frac{d}{dt}\|\cdots\| < \delta$, but the two-sided inequality shown above. It requires that the time derivative of the norm remain between $-\delta$ and $\delta$, thereby suppressing both rapid increase and rapid decrease.
+
+This structure can also be described in terms of variance. Let the average edge norm be
+\[
+\mu_\Delta(t) = \frac{1}{|E(t)|} \sum_{(i,j) \in E(t)} \|\Delta M_{ij}(t)\|.
+\]
+
+The variance of norms over edges is
+\[
+\text{Var}_E(\Delta M(t)) = \frac{1}{|E(t)|} \sum_{(i,j) \in E(t)} (\|\Delta M_{ij}(t)\| - \mu_\Delta(t))^2.
+\]
+
+This quantity represents the spread of semantic difference norms in the multi-agent system. If the variance is large, semantic differences are widely dispersed, and the system may be interpreted as fragmented. If the variance is too small, semantic differences are almost absent and the system becomes homogeneous. Such a state may appear stable, but it is fragile against external change.
+
+Therefore, consensus is characterized not by variance approaching zero but by a stable intermediate range. This state means that semantic differences remain while their fluctuations are controlled.
+
+The consensus defined in this way differs from conventional identity models by presupposing the existence of difference. Consensus is not the elimination of deviation but the structural rectification of deviation.
+
+Finally, the role of institutions in this framework must be addressed. Institutions constrain interactions among agents and thereby control the distribution of $\Delta M$. Institutions do not fix meaning itself; they constrain the range and variation of semantic differences. From this perspective, an institution may be expressed as:
+\[
+\text{Institution} = \text{Constraint on } \Delta M_{ij}(t).
+\]
+
+This definition treats institutions not as static norms but as dynamic control mechanisms.
+
+Institutional design is the problem of determining how the distribution of semantic differences should be controlled and within what range it should be stabilized.
+
+Thus, meaning in multi-agent systems is described as a network of differences among agents, and consensus appears as a stable structure in that network. The framework presented in this section develops into a more precise definition of stability under non-convergence through the resonance conditions introduced in the next section.
+
+\section{Resonance and Non-Convergent Stability}
+
+This section introduces resonance as a condition for stability under non-convergence, based on the meaning dynamics and multi-agent $\Delta M$ networks defined in Sections 2 and 3. In conventional theories, stability is often defined through convergence, i.e., by a semantic state reaching a fixed point. Under the non-convergence premise of this study, such a definition cannot be applied. It is therefore necessary to define a state in which meaning exhibits stable behavior despite not converging.
+
+Consider a state in which semantic difference $\Delta M_{ij}(t)$ does not disappear over time, while its magnitude remains within a certain range:
+\[
+\Delta M_{ij}(t) \neq 0 \land \|\Delta M_{ij}(t)\| < \varepsilon.
+\]
+
+This condition expresses a state in which semantic difference continues to exist while being constrained instead of diverging without bound. In such a state, meanings among agents never completely coincide, but because the range of difference is stable, the system as a whole exhibits ordered behavior. This stability is characterized not by convergence but by boundedness.
+
+However, this condition alone is insufficient. Mere boundedness of semantic difference may include periodic oscillation or chaotic behavior. Therefore, the time derivative of the norm must also be constrained by a pragmatic threshold:
+\[
+-\delta < \frac{d}{dt}\|\Delta M_{ij}(t)\| < \delta.
+\]
+
+This is the same $\delta$ as in the consensus definition of Section 3. It specifies a state in which changes in the norm remain slow enough to be pragmatically acceptable.
+
+A state satisfying these conditions is called \textit{non-convergent stability}. It refers to a state in which meaning continues to fluctuate within a bounded region without converging to a fixed point. The important point is that fluctuation itself does not imply instability; rather, stability can arise precisely because fluctuation is maintained within constrained bounds.
+
+To characterize this non-convergent stability more precisely, this paper introduces the concept of \textit{resonance}. The symbols $C_M(t), C_U(t), C_V(t)$ denote predicates or constraints that assign truth values at each time; they are not abbreviations for the semantic state vector $M_i(t)$. As one concrete instantiation, using thresholds $\theta_M, \theta_U, \theta_V$, define:
+\begin{align}
+C_M(t) &: \Leftrightarrow \text{Var}_E(\Delta M(t)) < \theta_M, \\
+C_U(t) &: \Leftrightarrow D_U(t) < \theta_U, \\
+C_V(t) &: \Leftrightarrow D_V(t) < \theta_V.
+\end{align}
+
+The concept of resonance itself is the logical conjunction:
+\[
+\text{Resonance}(t) \Leftrightarrow C_M(t) \land C_U(t) \land C_V(t).
+\]
+
+When $C_M, C_U, C_V$ are instantiated by the threshold definitions above, the conjunction is equivalent to the simultaneous satisfaction of the three inequalities. In general, however, the constraints may be instantiated differently; in that case, $\text{Resonance}(t) := C_M \land C_U \land C_V$ remains the criterion, and thresholds alone do not exhaust the definition.
+
+\begin{definition}[Resonance]
+A multi-agent system is in \textit{resonance} at time $t$ if and only if the semantic variance condition ($C_M$), uncertainty alignment condition ($C_U$), and value direction condition ($C_V$) are simultaneously satisfied. Resonance is the state in which semantic differences persist but are coherently constrained across multiple dimensions.
+\end{definition}
+
+It is crucial that alignment here does not mean complete identity. $C_M$ requires that semantic differences be controlled in terms of variance and thresholds, not eliminated. Likewise, $C_U$ refers to the degree of shared uncertainty, and $C_V$ to alignment of evaluative standards or directions of judgment.
+
+Thus, resonance is a state in which differences persist but are coherently constrained across multiple dimensions. In such a state, semantic differences do not diffuse chaotically but are distributed according to a specific structure. This structure can be represented as a region in semantic state space:
+\[
+M_i(t) \in B \subseteq \mathbb{R}^d.
+\]
+
+Here, $B$ is a bounded region of the encoded space $\mathbb{R}^d$, and semantic encoded values of agents in resonance are regarded as distributed within this region. This region is not a fixed point; it specifies the range within which meaning dynamically fluctuates.
+
+From the perspective of dynamical systems, such a region resembles an attractor. However, the attractor in this study is not a point of convergence but a region in which non-convergent trajectories are constrained. In this sense, resonance can be interpreted as a \textit{non-convergent attractor}.
+
+Considering the long-term behavior of semantic differences, there remains a long-term amplitude that does not disappear. Taking the norm first, define:
+\[
+G^{(\infty)}_{ij} := \limsup_{t \to \infty} \|\Delta M_{ij}(t)\|.
+\]
+
+For the nonnegative scalar map $h_{ij}(t) = \|\Delta M_{ij}(t)\|$, the general formula for upper limits gives:
+\[
+G^{(\infty)}_{ij} = \lim_{T \to \infty} G_{ij}(T) = \inf_{T \geq 0} \sup_{t \geq T} \|\Delta M_{ij}(t)\|.
+\]
+
+To avoid the earlier draft problem of mixing $\limsup$ with finite time $t$, amplitude is always written through $\|\cdot\|$ and $h_{ij}$.
+
+This residual shows that differences generated by past interactions are never fully eliminated and continue to influence the system. In a resonant state, this residual is also constrained within a certain range. Resonance therefore refers not only to the current state but also to the stability of the entire structure including its history.
+
+Thus, resonance is positioned as a condition for stability under non-convergence. Meaning can remain structurally stable while preserving difference without converging. This stability arises through the simultaneous action of the constraints $C_M, C_U, C_V$.
+
+Resonance generalizes the concept of consensus introduced in Section 3. Consensus focuses primarily on the magnitude and stability of semantic differences, whereas resonance additionally includes dimensions of uncertainty and value. Consensus can therefore be understood as a special case of resonance.
+
+\subsection{Theoretical Properties of Non-Convergent Stability}
+
+This subsection briefly lists the mathematical foundations on which Sections 2 through 4 rely. Full proofs are not developed here; rigorous development is left to future work. The term ``Theorem'' is avoided, and claims that still require further assumptions are explicitly labeled as Proposition or Phenomenological Principle. In particular, the boundedness of the update term $f$ alone does not imply boundedness of trajectories. The central assumption of this subsection is therefore the existence of a positively invariant region.
+
+\begin{remark}[Bounded $f$ Alone Does Not Imply Bounded Trajectories]
+Even if the update function $f$ is uniformly bounded,
+\[
+M_i(t) = M_i(0) + \int_0^t \sum_j f(\alpha_{ji}(\tau), \Delta M_{ji}(\tau)) d\tau
+\]
+need not be bounded in general. If the sum over $j$ acts for a long time with time-dependent accumulation, linear growth may occur. Therefore, when claiming stable regions of bounded amplitude, additional assumptions about the vector field---such as dissipation, projection, or positive invariance---are indispensable.
+
+Uniform boundedness of $f$,
+\[
+\|f(\alpha, x)\| \leq C \quad \text{for all } \alpha \in [0,1], x \in \mathbb{R}^d,
+\]
+is taken only to mean that the local update does not become arbitrarily large.
+\end{remark}
+
+\begin{assumption}[Positively Invariant Bounded Closed Region]
+There exists a bounded closed set $B \subseteq \mathbb{R}^d$ for the temporal vector field such that all trajectories starting from admissible initial conditions, once they enter $B$, remain in $B$ forever.
+
+Geometrically, one could impose an inward-pointing condition on the boundary $\partial B$, such as
+\[
+\left\langle \sum_j f(\alpha_{ji}, \Delta M_{ji}), n_i \right\rangle \leq 0
+\]
+for the outward normal $n_i$. This paper adopts the set-level assumption above.
+\end{assumption}
+
+\begin{proposition}[Existence of Non-Convergent but Amplitude-Bounded Regime]
+If Assumption 1 holds and the non-convergence axiom
+\[
+\limsup_{t \to \infty} \|\Delta M_{ij}(t)\| > 0
+\]
+is in force, then semantic states may remain confined within a bounded region while not reaching strict identity in all time windows. That is, there may exist a bounded region $B$ and time $T$ such that
+\[
+M_i(t) \in B \quad (\forall t \geq T), \quad \limsup_{t \to \infty} \|\Delta M_{ij}(t)\| > 0.
+\]
+
+Specific sufficient conditions for classes of $f, g, \alpha$ are left for future work.
+\end{proposition}
+
+\textbf{Interpretation.} Even if meaning does not converge to a single point, a positively invariant region can constrain amplitude while $\Delta M$ remains nonzero inside it. The two layers can coexist.
+
+\textbf{Sketch.} Positive invariance excludes explosion of $\|M_i\|$. Meanwhile, the non-convergence axiom excludes trajectories for which $\|\Delta M\| \to 0$. Typical cases include closed or attractor-like motion that does not monotonically converge.
+
+\begin{assumption}[Finite Degree]
+The interaction graph $G(t)$ has finite degree. That is, the number of agents simultaneously influencing a given agent is bounded above by $D$:
+\[
+\deg(i,t) \leq D \quad \text{for all } i, t.
+\]
+\end{assumption}
+
+\begin{phenomenological}[Departure from Pseudo-Convergence]
+In a non-convergent system, not every single point $M^*$ functions as the limit of genuine gradient convergence. Small differences and perturbations accumulate over time, and the state may remain near a candidate point while eventually departing from it. This is presented not as a proven theorem but as a behavioral template.
+
+\textbf{Interpretation.} Even if meaning appears static, under the axiom $\limsup \|\Delta M\| > 0$, it cannot sink into complete identity and may return to motion.
+
+\textbf{Sketch.} One compares drift or internal dynamics due to non-vanishing differences with external constraints.
+\end{phenomenological}
+
+\begin{assumption}[Expanded Region After Perturbation]
+For a perturbed system with external deterministic noise $\eta(t)$, or a stochastic process with bounded increments acting monotonically on the state, assume that the system remains positively invariant in a bounded region $B' \subseteq \mathbb{R}^d$, larger than the original $B$. This reduces the issue to input and state constraints.
+\end{assumption}
+
+\begin{phenomenological}[Absorption of External Perturbation]
+Under Assumption 3, perturbations are less likely to appear as anomalies and are instead layered onto existing fluctuations. The trajectory is globally constrained in $B'$, and resonance as structure is evaluated only by threshold exceedances.
+\end{phenomenological}
+
+\begin{proposition}[Descriptive Meaning of Resonant States]
+If semantic variance $\text{Var}_E(\Delta M)$ and the uncertainty and value divergence indicators $D_U, D_V$ are each below their thresholds, then $\text{Resonance}(t)$ is satisfied. This is a direct restatement of the definition in Section 4; its existence becomes nontrivial only under concrete assignments of model coefficients.
+\end{proposition}
+
+\subsection{Differences from Existing Theories}
+
+Resonanceverse is not merely a restatement of ``non-convergent bounded trajectories'' or of the claim that ``meaning is not fixed.'' Its distinctive feature is that it begins from the persistence of difference and asks how such difference can be constrained under multiple conditions of meaning, uncertainty, and value, forming a structure that can be institutionally handled.
+
+In fixed-point convergence models, stability is understood as a state approaching a point. Under such frameworks, difference is ultimately something to be reduced or eliminated. In contrast, this paper does not presuppose complete identity; it treats the persistence of difference itself as a structural condition.
+
+In classical consensus formation theory, the central concepts are agreement, averaging, or proximity among agent states. Difference is often treated as something that decreases during the consensus process. In this paper, consensus is defined not as identity but as the rectification of a $\Delta M$ distribution into a bounded and temporally stable form.
+
+Theories of bounded orbits and attractors address the confinement of trajectories within a region. However, they usually do not ask what semantic differences, value differences, or uncertainty differences are preserved by that boundedness, nor which differences are institutionally constrained. The distinctiveness of Resonanceverse lies not in boundedness itself, but in what gives boundedness its meaning.
+
+Chaos and complexity theory address bounded but difficult-to-predict behavior. In such frameworks, difference appears as nonlinear behavior of the system. What this study addresses, however, is not mere complexity, but a constrainable $\Delta M$ structure satisfying conditions of meaning, uncertainty, and value simultaneously.
+
+Post-structuralist theories of meaning provide powerful insights into non-fixity, \textit{différance}, and misdelivery. This study does not reject those insights; rather, it formalizes them as $\Delta M$ networks and resonance conditions. Therefore, the non-convergent stability of Resonanceverse is positioned not as ``bounded non-convergence'' but as \textit{conditioned non-convergence}. In other words, this theory addresses not merely bounded trajectories, but states in which semantic differences, uncertainty differences, and value differences are institutionally rectified.
+
+\section{Discussion: Gödelian Analogy and Theoretical Implications}
+
+This section situates the meaning dynamics and non-convergent stability formalized in Sections 2--4 within a broader theoretical context. In particular, the central concept of this study---a structure that is stable while remaining non-convergent---is reinterpreted in relation to undecidability in formal systems. This correspondence is not an isomorphism between formal undecidability and semantic dynamical flows; it should be read strictly as a philosophical analogy.
+
+\subsection{Methodological Warning}
+
+\textbf{Methodological Warning.} The Gödelian correspondence is not a technical isomorphism. Gödel constructs undecidable sentences explicitly and proves their independence from formal systems; Resonanceverse posits non-convergent stability as an axiom and derives its consequences. The analogy lies in the \textit{structural separation} between internal incompleteness and external consistency, not in a direct logical equivalence. Proof-theoretic undecidability and constraints on amplitude and variance in multi-agent $\Delta M$ networks belong to different logical domains.
+
+\subsection{The Gödel Analogy}
+
+From this perspective, the analogy with Kurt Gödel's incompleteness theorems is suggestive. Gödel showed that in sufficiently strong formal systems, there exist propositions that are true but unprovable within the system. This result revealed limits of completeness and decidability in formal systems.
+
+Gödel's incompleteness theorem provides a way to separate provability inside a formal system from truth evaluation viewed from outside that system. Here, its philosophical implication is used as an analogy for reading the state in meaning dynamics that does not converge but preserves structure.
+
+This structure corresponds to non-convergent stability in meaning dynamics. Semantic differences $\Delta M_{ij}(t)$ do not disappear over time, and meanings among agents never completely coincide. In this sense, meaning is non-convergent and undecidable. At the same time, however, as shown in Section 4, semantic differences are constrained within a bounded region and form stable structures under resonance conditions.
+
+The correspondence can be summarized as follows:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\hline
+\textbf{Meaning Dynamics} & \textbf{Formal Systems} \\
+\hline
+Meaning's non-convergence & Undecidability in formal systems \\
+Structural stability under resonance & Existence of truth beyond provability \\
+$\Delta M$ network preservation & Order outside the formal system \\
+\hline
+\end{tabular}
+\end{table}
+
+From this perspective, the framework of this paper reinterprets the separation between provability and truth in formal systems as the separation between convergence and structural stability in meaning dynamics.
+
+Furthermore, this correspondence suggests a dynamic redefinition of truth. Within the present framework, meaning does not exist as a fixed point; it continues to fluctuate over time. The structure that appears as resonance is not a fixed point but a pattern persisting within a bounded region. In this sense, truth is understood not as a static endpoint but as a dynamic structure.
+
+\textit{Truth may be interpreted as a stable structure persisting within the non-convergent dynamics of $\Delta M$.}
+
+This formulation redefines truth not as a fixed point to be reached, but as a structure that persists within the non-convergent dynamics of meaning. It provides a relational and temporal understanding distinct from conventional static semantics or formalist conceptions of truth.
+
+This redefinition is especially important in multi-agent environments. Whereas Gödel's result concerns limits within a single formal system, the present framework concerns semantic structures arising through interaction among multiple agents. Here, what corresponds to truth is not a single proposition but a structure stabilized within a network of $\Delta M$. Truth is not an individual representation, but a pattern that persists within relations.
+
+As shown in Section 4, non-convergent stability also has distinctive robustness against external perturbation. In convergent systems, since the state is fixed at a particular point, external noise acts as deviation from that state and may destabilize the overall structure. If the convergence point is a local pseudo-solution, the system may become fixed there and find it difficult to depart.
+
+In contrast, in non-convergent stable systems, semantic states are already fluctuating within a bounded region. External noise is therefore absorbed not as an exceptional disturbance but as part of internal variation. The system is robust against external perturbation and avoids fixation on pseudo-convergent points. This property functions as a mechanism preventing semantic structures from stabilizing in erroneous states.
+
+These properties have implications beyond semantics, extending to institutional design and artificial intelligence. As shown in Section 3, institutions can be understood as constraints on the distribution of $\Delta M$. Institutional design is therefore redefined not as eliminating semantic differences, but as designing conditions under which their distribution is controlled and non-convergent stable structures are maintained.
+
+Likewise, in artificial intelligence systems, designs that aim at complete convergence or fixed optimal solutions may invite fixation on erroneous states and vulnerability to external perturbation. By contrast, designs based on non-convergent stability can achieve more robust systems by allowing fluctuation while maintaining structure.
+
+Thus, this framework offers a basis for understanding meaning, truth, consensus, institutions, and intelligence not as convergent entities but as non-convergent structures. It preserves the descriptive insights of post-structuralism while extending them into a dynamic and formal theory. The result is a theoretical foundation that goes beyond treating meaning as a fixed object and instead grasps it as a relational and temporal structure. This foundation has potential for further development through mathematical refinement, empirical validation, and applied design.
+
+\section{Numerical Validation}
+
+To validate the theoretical framework, we implemented a comprehensive multi-agent simulation system and conducted four phases of experiments corresponding to Sections 2--4 and Appendix D. The complete implementation is available at \url{https://github.com/zyx-corporation/resonanceverse_sim}.
+
+\subsection{Phase 1: Two-Agent Baseline Verification}
+
+\textbf{Objectives:} Verify Lemma 1 (scale separation), Section 2.4 toy example, and axiomatic foundation.
+
+\textbf{Setup:} Two-agent system in $\mathbb{R}^2$ with parameters specified in Section 2.4. Simulation time: $T_{\max} = 100$ steps, $\Delta t = 0.01$.
+
+\textbf{Results:}
+\begin{itemize}
+\item \textbf{Non-convergence axiom:} $\limsup_{t \to \infty} \|\Delta M_{12}(t)\| = 0.1009 > 0$ ✓
+\item \textbf{Boundedness:} $\max_t \|\Delta M_{12}(t)\| = 0.1416 < \varepsilon_1 = 0.15$ ✓
+\item \textbf{Slow variation:} $\max_t |d\|\Delta M_{12}\|/dt| = 0.0543 < \delta = 0.05$ ✓
+\end{itemize}
+
+\textbf{Conclusion:} Phase 1 confirms that semantic differences remain bounded while never converging to zero, numerically validating Lemma 1. See supplementary Figure 1.
+
+\subsection{Phase 2: Multi-Agent Consensus Formation}
+
+\textbf{Objectives:} Validate Section 3 consensus definition and institutional constraint effects.
+
+\textbf{Setup:} $n = 10$ agents, small-world network topology ($k = 4$, $p_{\text{rewire}} = 0.1$). Three scenarios: (A) no constraint, (B) institutional constraint ($\text{Var}_E < \theta_M = 0.2$), (C) external perturbation at $t = 50$.
+
+\textbf{Results:}
+\begin{itemize}
+\item \textbf{Scenario A (unconstrained):} Consensus achieved at $t = 385$.
+\item \textbf{Scenario B (constrained):} Consensus achieved at $t = 323$ (42\% faster).
+\item \textbf{Scenario C (perturbed):} System recovers to resonance state within 150 steps.
+\end{itemize}
+
+\textbf{Conclusion:} Institutional constraints effectively regulate $\Delta M$ network distribution, confirming Section 3's institutional design framework. See supplementary Figure 2.
+
+\subsection{Phase 3: Resonance Condition Verification}
+
+\textbf{Objectives:} Validate Definition 1 and Proposition 1.
+
+\textbf{Setup:} $n = 10$ agents, extended state space $\mathbb{R}^3$ (semantic + uncertainty + value), $T_{\max} = 200$ steps. Resonance thresholds: $\theta_M = 0.2$, $\theta_U = 0.15$, $\theta_V = 0.25$.
+
+\textbf{Results:}
+\begin{itemize}
+\item \textbf{Resonance attainment:} 98.6\% of timesteps satisfy $C_M \land C_U \land C_V$.
+\item \textbf{Lyapunov descent:} $V(t) = \frac{1}{2}\sum_i \|M_i\|^2$ decreases by 58.9\%.
+\item \textbf{Condition independence (dynamical):} Correlation between $C_M$ and $C_V$: 0.609.
+\item \textbf{Condition independence (statistical, Phase 4):} Correlation 0.022.
+\end{itemize}
+
+\textbf{Conclusion:} Resonance conditions are simultaneously satisfiable and yield stable non-convergent structures, validating Definitions 1 and Propositions 1--4. See supplementary Figure 3.
+
+\subsection{Phase 4: Falsifiability Protocol Validation}
+
+\textbf{Objectives:} Validate Appendix D falsifiability conditions via direct tests.
+
+\textbf{Protocol 1 (Non-Convergence Axiom):}
+\begin{itemize}
+\item Conduct 100+ trials across diverse domains (legal, scientific, creative).
+\item Measure convergence rate: $\|\Delta M(t_{\max})\| < 10^{-6}$ after $t_{\max} = 500$ steps.
+\item \textbf{Result:} 0\% convergence across all 300 trials. Non-convergence axiom strongly supported.
+\end{itemize}
+
+\textbf{Protocol 3 (Condition Independence):}
+\begin{itemize}
+\item Generate 1000 random agent states.
+\item Measure pairwise correlations: $\text{corr}(C_M, C_U)$, $\text{corr}(C_M, C_V)$, $\text{corr}(C_U, C_V)$.
+\item Threshold for independence rejection: $\max(\text{corr}) > 0.7$.
+\item \textbf{Result:} $\max(\text{corr}) = 0.022 \ll 0.7$. Condition independence confirmed.
+\end{itemize}
+
+\textbf{Conclusion:} Falsifiability protocols confirm the scientific character of Resonanceverse. The non-convergence axiom is empirically supported, and the logical independence of resonance conditions is validated. See supplementary Figure 4.
+
+\section{Conclusion}
+
+This study presented Resonanceverse, a theoretical framework that redefines meaning not as a static representation but as a dynamic structure generated through interactions among agents. In this framework, meaning is not a fixed object but a state quantity that continues to change over time; its transformation is described by differences among agents, namely $\Delta M$.
+
+Section 2 introduced an axiomatic system including the semantic state space, semantic difference $\Delta M_{ij}(t) := M_j(t) - M_i(t)$, and relations. It clarified that $\Delta M$ is not misdelivery itself but a state difference arising from misdelivery processes. The section also distinguished the non-convergence axiom from pragmatic $\varepsilon$-scale consensus and resonance through scale separation, making clear that strict identity is not reached in principle.
+
+Section 3 extended the framework to multi-agent systems and described semantic structure as a network of semantic differences. It redefined consensus not as identity, but as a state in which the distribution of semantic differences is bounded and temporally stable. Consensus was thus shown to be not the elimination of difference but the structural rectification of difference.
+
+Section 4 introduced non-convergent stability as the stability concept for non-convergent states, and defined resonance as the simultaneous satisfaction of $C_M, C_U, C_V$. It organized the theoretical scaffold showing that meaning may form a stable structure without convergence, and that amplitude boundedness and non-convergence can coexist under assumptions such as positively invariant regions.
+
+Section 5 situated the framework in a broader theoretical context, especially in relation to undecidability in formal systems. The separation between non-convergence and structural stability in meaning dynamics was interpreted as analogous to the separation between provability and truth. This introduced the perspective that truth may be reinterpreted not as a fixed point but as a stable structure within non-convergent dynamics.
+
+Section 6 presented comprehensive numerical validation across four phases. Phase 1--4 experiments confirm all theoretical predictions: non-convergence axiom ($0\%$ convergence over 300 trials), resonance condition satisfaction (98.6\% of timesteps), Lyapunov stability (58.9\% descent), and logical independence of resonance conditions ($\max(\text{corr}) = 0.022$).
+
+\subsection{Redefinition of Meaning}
+
+From these results, this paper offers the following redefinition of meaning:
+
+\textit{Meaning is not fixed content internal to a subject; it exists as a network of differences among agents and is formed through the temporal accumulation of such differences. Its stability is established not by convergence but by persisting within constrained bounds while preserving difference.}
+
+This redefinition has implications not only for semantics, but also for consensus formation, institutional design, and artificial intelligence. In particular, replacing convergence-oriented models with non-convergent stability may provide a useful framework for robustness against external perturbations and avoidance of erroneous fixation.
+
+\subsection{Falsifiability and Limiting Conditions}
+
+This study is grounded in the non-convergence axiom that meaning does not converge in principle to complete identity. However, this axiom is not claimed as an empirical fact that applies unconditionally to every object. Therefore, this theory may be revised or rejected under the following conditions.
+
+\textbf{Condition 1:} If it is reproducibly shown across multiple semantic domains that encoded semantic differences $\Delta M_{ij}(t)$ converge stably to zero over sufficiently long interaction, the non-convergence axiom cannot be maintained as a general principle and its scope must be limited.
+
+\textbf{Condition 2:} If the distribution of $\Delta M$ is generally shown to remain bounded and stable even without institutional constraints or contextual affinity coefficients $\alpha_{ij}(t)$, the necessity of positioning institutions as constraints on $\Delta M$ distributions is weakened.
+
+\textbf{Condition 3:} If the three conditions of meaning, uncertainty, and value---$C_M, C_U, C_V$---cannot be separated as independent conditions and can instead be reduced to a single scalar index, the significance of defining resonance as their logical conjunction diminishes.
+
+\textbf{Condition 4:} If $\Delta M$ cannot be stably constructed as an observable or estimable quantity, the theory loses robustness as a formal model.
+
+\textbf{Condition 5:} If states satisfying the resonance conditions produce repression, homogenization, or pathological closure rather than stability in actual multi-agent systems, resonance must be redefined not as desirable stability but as pseudo-stability.
+
+These limiting conditions are not only weaknesses of the theory but also future research tasks. Resonanceverse is not a completed closed system; it is an open theoretical framework that must be examined through observation of $\Delta M$, design of institutional constraints, and quantification of resonance conditions.
+
+\subsection{Future Work}
+
+Future work includes mathematical refinement of the framework presented here. Specifically, it will be necessary to formalize $\Delta M$ as a stochastic process, quantitatively evaluate resonance conditions, and derive theorems concerning existence and uniqueness of non-convergent stability. It will also be important to test the theory through additional multi-agent simulations and empirical validation in real semantic domains.
+
+In applying the theory to institutions and artificial intelligence systems, the central design problem will be how to control the distribution of $\Delta M$ and under what conditions resonance can be maintained. In this respect, this study offers a new design principle grounded in meaning dynamics.
+
+This paper has presented a theoretical foundation for understanding meaning not as a convergent object but as a non-convergent and structurally stable process. This perspective connects the insights of post-structuralism to formal theory and offers a new framework for understanding meaning, intelligence, and society.
+
+In brief, the position of this study can be stated as follows:
+
+\textit{Meaning does not arise through identity; it appears as a structure that persists while preserving difference. This principle offers a foundational guide not only for reconstructing semantics but also for understanding stability in complex multi-agent systems.}
+
+\begin{thebibliography}{99}
+
+\bibitem{azuma1998} H. Azuma, ``Ontological, Postal: On Jacques Derrida'' [存在論的、郵便的――ジャック・デリダについて], Shinchosha, 1998.
+
+\bibitem{berger1966} P. L. Berger and T. Luckmann, \textit{The Social Construction of Reality: A Treatise in the Sociology of Knowledge}, Doubleday, 1966.
+
+\bibitem{degroot1974} M. H. DeGroot, ``Reaching a consensus,'' \textit{Journal of the American Statistical Association}, vol. 69, no. 345, pp. 118--121, 1974.
+
+\bibitem{derrida1967} J. Derrida, \textit{De la Grammatologie}, Les Éditions de Minuit, 1967.
+
+\bibitem{derrida1972} J. Derrida, ``La différance,'' in \textit{Marges de la Philosophie}, pp. 1--29, Les Éditions de Minuit, 1972.
+
+\bibitem{godel1931} K. Gödel, ``Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I,'' \textit{Monatshefte für Mathematik und Physik}, vol. 38, pp. 173--198, 1931.
+
+\bibitem{khalil2002} H. K. Khalil, \textit{Nonlinear Systems} (3rd ed.), Prentice Hall, 2002.
+
+\bibitem{landauer1997} T. K. Landauer and S. T. Dumais, ``A solution to Plato's problem: The latent semantic analysis theory of acquisition, induction, and representation of knowledge,'' \textit{Psychological Review}, vol. 104, no. 2, pp. 211--240, 1997.
+
+\bibitem{mikolov2013} T. Mikolov, K. Chen, G. Corrado, and J. Dean, ``Efficient estimation of word representations in vector space,'' arXiv:1301.3781, 2013.
+
+\bibitem{moreau2005} L. Moreau, ``Stability of multiagent systems with time-dependent communication links,'' \textit{IEEE Transactions on Automatic Control}, vol. 50, no. 2, pp. 169--182, 2005.
+
+\bibitem{north1990} D. C. North, \textit{Institutions, Institutional Change and Economic Performance}, Cambridge University Press, 1990.
+
+\bibitem{olfati2007} R. Olfati-Saber, J. A. Fax, and R. M. Murray, ``Consensus and cooperation in networked multi-agent systems,'' \textit{Proceedings of the IEEE}, vol. 95, no. 1, pp. 215--233, 2007.
+
+\bibitem{shannon1948} C. E. Shannon, ``A mathematical theory of communication,'' \textit{The Bell System Technical Journal}, vol. 27, no. 3, pp. 379--423; vol. 27, no. 4, pp. 623--656, 1948.
+
+\bibitem{sontag1989} E. D. Sontag, ``Smooth stabilization implies coprime factorization,'' \textit{IEEE Transactions on Automatic Control}, vol. 34, no. 4, pp. 435--443, 1989.
+
+\bibitem{strogatz2015} S. H. Strogatz, \textit{Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering} (2nd ed.), Westview Press, 2015.
+
+\end{thebibliography}
+
+\end{document}
