@@ -1,0 +1,62 @@
+defaults:
+  dt: 0.01
+  seed: 42
+
+phase1:
+  d: 2
+  T_max: 100
+  dt: 0.01
+  M1_init: [0.0, 0.0]
+  M2_init: [1.0, 0.5]
+  alpha_base: 0.7
+  alpha_amp: 0.2
+  alpha_freq: 0.1
+  r_rep: 0.1
+  c_rep: 0.5
+  c_att: 0.3
+  epsilon_band: [0.05, 0.15]
+
+phase2:
+  n_agents: 10
+  d: 3
+  T_max: 100
+  dt: 0.01
+  topology: small_world
+  k: 4
+  p_rewire: 0.1
+  clusters: 3
+  theta_M: 0.2
+  perturbation_t: 50      # Scenario C: 外乱注入時刻
+  perturbation_idx: 0     # 外乱を受けるエージェントID
+  perturbation_mag: 2.0   # 外乱の大きさ
+
+phase3:
+  n_agents: 6
+  d: 3
+  dv: 3
+  T_max: 150
+  dt: 0.01
+  topology: complete
+  theta_M: 0.2
+  theta_U: 0.3
+  theta_V: 0.1
+  gamma_U: 0.05
+  gamma_V: 0.1
+
+phase4:
+  n_trials: 100
+  n_samples: 500
+  domains: [legal, scientific, creative]
+  domain_params:
+    legal:
+      alpha_base: 0.5
+      r_rep: 0.2
+      c_att: 0.1
+    scientific:
+      alpha_base: 0.7
+      r_rep: 0.1
+      c_att: 0.3
+    creative:
+      alpha_base: 0.9
+      r_rep: 0.05
+      c_att: 0.5
