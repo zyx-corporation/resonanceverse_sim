@@ -1,7 +1,7 @@
 # Makefile
 
-FILENAME = resonanceverse_article
-FILENAME_JA = resonanceverse_article_ja
+FILENAME = resonanceverse_en
+FILENAME_JA = resonanceverse_ja
 
 LATEX = xelatex
 LATEXFLAGS = -interaction=nonstopmode
